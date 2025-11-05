@@ -1,0 +1,36 @@
+# GitHub Pages Configuration
+# ==========================
+
+# Site settings
+title: "Othello Computer Vision Demo"
+description: "AI-Powered Board Game Analysis by GamesCrafters at UC Berkeley"
+baseurl: "" # Leave empty for user/organization pages
+url: "" # Will be auto-populated by GitHub Pages
+
+# Build settings
+theme: null # Using custom HTML/CSS
+
+# Exclude files from processing
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .sass-cache
+  - .git
+  - .github
+
+# Include files
+include:
+  - _config.yml
+
+# Collections (if needed in future)
+collections: {}
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"

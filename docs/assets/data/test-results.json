@@ -1,0 +1,169 @@
+{
+  "summary": {
+    "total_tests": 14,
+    "tests_passed": 14,
+    "tests_failed": 0,
+    "success_rate": 100,
+    "test_date": "2025-11-05",
+    "total_processing_time": 150.23
+  },
+  "performance": {
+    "image_processing": {
+      "avg_time_seconds": 0.03,
+      "min_time_seconds": 0.03,
+      "max_time_seconds": 0.05
+    },
+    "video_processing_4x4": {
+      "avg_time_seconds": 13.04,
+      "avg_frames": 2646,
+      "avg_moves_detected": 13
+    },
+    "video_processing_8x8": {
+      "avg_time_seconds": 20.52,
+      "avg_frames": 4162,
+      "avg_moves_detected": 21
+    }
+  },
+  "tests": [
+    {
+      "id": 1,
+      "name": "4x4 Video - Basic Processing",
+      "status": "PASSED",
+      "processing_time": 12.59,
+      "total_frames": 2646,
+      "moves_detected": 13
+    },
+    {
+      "id": 2,
+      "name": "4x4 Video - JSON Output",
+      "status": "PASSED",
+      "processing_time": 12.35,
+      "total_frames": 2646,
+      "moves_detected": 13
+    },
+    {
+      "id": 3,
+      "name": "4x4 Video - Annotated Output",
+      "status": "PASSED",
+      "processing_time": 13.30,
+      "total_frames": 2646,
+      "moves_detected": 13,
+      "output_size_kb": 913
+    },
+    {
+      "id": 4,
+      "name": "4x4 Video - Debug Mode",
+      "status": "PASSED",
+      "processing_time": 12.87,
+      "total_frames": 2646,
+      "moves_detected": 13
+    },
+    {
+      "id": 5,
+      "name": "4x4 Video - All Output Formats",
+      "status": "PASSED",
+      "processing_time": 15.06,
+      "total_frames": 2646,
+      "moves_detected": 13
+    },
+    {
+      "id": 6,
+      "name": "8x8 Video - Basic Processing",
+      "status": "PASSED",
+      "processing_time": 20.14,
+      "total_frames": 4162,
+      "moves_detected": 21
+    },
+    {
+      "id": 7,
+      "name": "8x8 Video - JSON Output",
+      "status": "PASSED",
+      "processing_time": 20.91,
+      "total_frames": 4162,
+      "moves_detected": 21
+    },
+    {
+      "id": 8,
+      "name": "8x8 Video - Skip Frames = 10",
+      "status": "PASSED",
+      "processing_time": 25.92,
+      "total_frames": 4162,
+      "moves_detected": 48
+    },
+    {
+      "id": 9,
+      "name": "Image - Basic Processing",
+      "status": "PASSED",
+      "processing_time": 0.03,
+      "board_state": "-----BW-BWB-W---"
+    },
+    {
+      "id": 10,
+      "name": "Image - JSON Output",
+      "status": "PASSED",
+      "processing_time": 0.03,
+      "board_state": "-----BW-BWB-W---"
+    },
+    {
+      "id": 11,
+      "name": "Image - Annotated Output",
+      "status": "PASSED",
+      "processing_time": 0.03,
+      "output_size_kb": 91
+    },
+    {
+      "id": 12,
+      "name": "Image - Debug Mode",
+      "status": "PASSED",
+      "processing_time": 0.05
+    },
+    {
+      "id": 13,
+      "name": "GamesmanUni Full Video - 4x4",
+      "status": "PASSED",
+      "processing_time": 16.04,
+      "total_frames": 1352,
+      "moves_detected": 2
+    },
+    {
+      "id": 14,
+      "name": "Real World Video - 8x8",
+      "status": "PASSED",
+      "processing_time": 9.55,
+      "total_frames": 719,
+      "moves_detected": 2
+    }
+  ],
+  "sample_outputs": {
+    "4x4_game_state": "-----BW-BWB-W---",
+    "8x8_game_state": "---------------------------WB------BW---------------------------",
+    "sample_moves": [
+      {
+        "player": 1,
+        "state": "-----BW--WB-----",
+        "frame": 0
+      },
+      {
+        "player": 2,
+        "state": "-----BW--BB--B--",
+        "frame": 180
+      },
+      {
+        "player": 1,
+        "state": "-----BW--WB-WB--",
+        "frame": 340
+      }
+    ]
+  },
+  "board_sizes_supported": ["4x4", "8x8"],
+  "output_formats": ["JSON", "Text", "Annotated Video/Image", "Debug Masks"],
+  "features": [
+    "Automatic board detection",
+    "Piece color recognition (B/W/-)",
+    "Video frame-by-frame analysis",
+    "Motion detection for stable frames",
+    "Configurable sensitivity",
+    "Multiple output formats",
+    "Debug visualizations"
+  ]
+}
