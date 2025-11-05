@@ -21,6 +21,14 @@ function switchTab(tabName) {
     const activeButton = document.getElementById(`tab-${tabName}`);
     activeButton.classList.remove('text-gray-600', 'border-transparent');
     activeButton.classList.add('text-gamescrafters-blue', 'border-gamescrafters-blue');
+
+    // If switching to video tab, ensure video is loaded
+    if (tabName === 'video') {
+        const video = document.getElementById('demo-video-player');
+        if (video) {
+            video.load(); // Reload the video to ensure it's ready
+        }
+    }
 }
 
 // Sample Data
