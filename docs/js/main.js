@@ -234,6 +234,6 @@ window.addEventListener('scroll', () => {
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
-    console.log('Othello CV Demo loaded successfully!');
-    console.log('Visit https://github.com/mananb77/gamescrafters-othello-cv for source code');
+    console.log('Othello CV Demo | GamesCrafters at UC Berkeley');
+    console.log('GitHub: https://github.com/mananb77/gamescrafters-othello-cv');
 });
