@@ -211,28 +211,27 @@
                     <div class="grid md:grid-cols-2 gap-8">
                         <div>
                             <h3 class="font-semibold text-gray-900 mb-4">Processing Demo Videos</h3>
-                            <p class="text-gray-600 mb-6">Watch how the system processes real game footage and extracts move sequences.</p>
+                            <p class="text-gray-600 mb-6">Watch how the system processes real game footage and extracts move sequences with grid overlay and piece detection.</p>
 
                             <div class="space-y-4">
                                 <div class="bg-gray-900 rounded-lg overflow-hidden">
-                                    <div class="aspect-video flex items-center justify-center text-white">
-                                        <div class="text-center">
-                                            <i class="fas fa-video text-4xl mb-3"></i>
-                                            <p>4x4 Game Processing</p>
-                                            <p class="text-sm text-gray-400">13 moves detected in 12.5s</p>
-                                        </div>
+                                    <video id="demo-video-player" class="w-full aspect-video" controls>
+                                        <source src="assets/videos/4x4-annotated-demo.mp4" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div class="p-4 bg-gray-800 text-white">
+                                        <div class="font-semibold">4x4 GamesmanUni Game - Annotated</div>
+                                        <div class="text-sm text-gray-400">13 moves detected in 12.5s • 2,646 frames processed</div>
                                     </div>
                                 </div>
 
-                                <div class="grid grid-cols-2 gap-4">
-                                    <button class="p-4 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition text-left">
-                                        <div class="font-semibold text-sm mb-1">4x4 GamesmanUni</div>
-                                        <div class="text-xs text-gray-500">2,646 frames • 13 moves</div>
-                                    </button>
-                                    <button class="p-4 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition text-left">
-                                        <div class="font-semibold text-sm mb-1">8x8 Standard</div>
-                                        <div class="text-xs text-gray-500">4,162 frames • 21 moves</div>
-                                    </button>
+                                <div class="bg-blue-50 p-4 rounded-lg">
+                                    <div class="flex items-start space-x-3">
+                                        <i class="fas fa-info-circle text-blue-500 mt-1"></i>
+                                        <div class="text-sm text-gray-700">
+                                            <strong>What you're seeing:</strong> Real-time board detection with grid overlay and piece labels (B/W) added to each frame.
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -442,27 +441,25 @@
 
             <!-- Gallery Grid -->
             <div class="grid md:grid-cols-3 gap-6" id="gallery-grid">
-                <!-- Placeholder items -->
+                <!-- Real sample items -->
                 <div class="gallery-item images" data-category="images">
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer">
-                        <div class="aspect-square flex items-center justify-center">
-                            <i class="fas fa-image text-4xl text-white"></i>
-                        </div>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer" onclick="window.open('assets/images/4x4-board-annotated.png', '_blank')">
+                        <img src="assets/images/4x4-board-annotated.png" alt="4x4 Board Annotated" class="w-full aspect-square object-cover">
                         <div class="p-4 bg-white">
-                            <h3 class="font-semibold text-gray-900">4x4 Board with Grid</h3>
-                            <p class="text-sm text-gray-600">Annotated detection output</p>
+                            <h3 class="font-semibold text-gray-900">4x4 Board with Grid Overlay</h3>
+                            <p class="text-sm text-gray-600">Annotated detection output • 91 KB</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="gallery-item videos" data-category="videos">
-                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer">
-                        <div class="aspect-square flex items-center justify-center">
-                            <i class="fas fa-video text-4xl text-white"></i>
+                    <div class="bg-gray-900 rounded-lg overflow-hidden shadow-md hover:shadow-xl transition cursor-pointer" onclick="document.getElementById('tab-video').click(); document.getElementById('demo-video-player').scrollIntoView({behavior: 'smooth', block: 'center'});">
+                        <div class="aspect-square flex items-center justify-center bg-gradient-to-br from-blue-600 to-purple-600">
+                            <i class="fas fa-play-circle text-6xl text-white"></i>
                         </div>
                         <div class="p-4 bg-white">
-                            <h3 class="font-semibold text-gray-900">Video Processing Result</h3>
-                            <p class="text-sm text-gray-600">913 KB • 2,646 frames</p>
+                            <h3 class="font-semibold text-gray-900">Annotated Video Processing</h3>
+                            <p class="text-sm text-gray-600">913 KB • 2,646 frames • Click to watch</p>
                         </div>
                     </div>
                 </div>
