@@ -99,10 +99,14 @@ def process_upload():
 
         if is_vid:
             # Process video
+            output_path = None
+            if annotate:
+                output_path = os.path.join(app.config['UPLOAD_FOLDER'], f'annotated_{filename}')
+
             result = cv_processor.process_video(
                 filepath,
-                save_annotated=annotate,
-                save_debug=debug
+                save_debug=debug,
+                output_video_path=output_path
             )
 
             # Clean up uploaded file
@@ -122,17 +126,19 @@ def process_upload():
 
         else:
             # Process image
-            state, processing_time = cv_processor.process_image(
+            result = cv_processor.process_image(
                 filepath,
-                save_annotated=annotate,
                 save_debug=debug
             )
 
             # Clean up uploaded file
             os.remove(filepath)
 
-            if state is None:
+            if result is None or 'state' not in result:
                 return jsonify({'error': 'Image processing failed'}), 500
+
+            state = result['state']
+            processing_time = result.get('processing_time', 0)
 
             # Count pieces
             piece_count = {
