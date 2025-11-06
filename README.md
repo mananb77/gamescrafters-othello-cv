@@ -13,6 +13,11 @@ Interactive demo website featuring:
 - 📊 **Test Results** - View performance metrics (14/14 tests passing)
 - 📚 **Documentation** - Complete API reference and usage guides
 
+**Sample Files for Testing:** Use files from the [`uploads/`](uploads/) folder in this repository to test the live demo:
+- `input-othello-4x4-gamesmanuni.mov` - 4x4 GamesmanUni video
+- `input-othello-8x8.mov` - 8x8 standard Othello video
+- `random-board-gamesman-uni.png` - Sample board image
+
 Built with UC Berkeley GamesCrafters branding and deployed on GitHub Pages.
 
 ## Overview
