@@ -252,7 +252,7 @@ window.addEventListener('scroll', () => {
 });
 
 // Live Upload Functionality
-const API_URL = 'http://localhost:5000/api';
+const API_URL = 'http://localhost:5001/api';
 let backendAvailable = false;
 
 // Check backend health on load

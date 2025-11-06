@@ -206,9 +206,9 @@ def internal_error(error):
 
 if __name__ == '__main__':
     print("🚀 Starting Othello CV Backend API...")
-    print("📍 Server: http://localhost:5000")
-    print("🔗 API Endpoint: http://localhost:5000/api/process")
-    print("💚 Health Check: http://localhost:5000/api/health")
+    print("📍 Server: http://localhost:5001")
+    print("🔗 API Endpoint: http://localhost:5001/api/process")
+    print("💚 Health Check: http://localhost:5001/api/health")
     print()
 
-    app.run(debug=True, host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5001)
