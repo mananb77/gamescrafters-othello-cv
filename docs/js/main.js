@@ -467,16 +467,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const fileInput = document.getElementById('live-file-input');
 
     if (uploadArea && fileInput) {
-        // Click to upload
-        uploadArea.addEventListener('click', () => {
-            fileInput.click();
+        // Click on upload area to trigger file input
+        uploadArea.addEventListener('click', (e) => {
+            // Don't trigger if clicking on the button directly
+            if (e.target.tagName !== 'BUTTON' && !e.target.closest('button')) {
+                fileInput.click();
+            }
         });
 
-        // File selected
+        // File selected via file input
         fileInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (file) {
                 handleLiveUpload(file);
+                // Reset input to allow selecting the same file again
+                fileInput.value = '';
             }
         });
 
@@ -486,7 +491,7 @@ document.addEventListener('DOMContentLoaded', () => {
             uploadArea.classList.add('bg-blue-50');
         });
 
-        uploadArea.addEventListener('dragleave', () => {
+        uploadArea.addEventListener('dragleave', (e) => {
             uploadArea.classList.remove('bg-blue-50');
         });
 
