@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual Environments
+venv/
+env/
+ENV/
+backend/venv/
+backend/env/
+
+# Test Results and Output
+test_results/
+output/
+annotated_output/
+
+# Debug Files
+masks/
+debug/
+*.png
+*.jpg
+*.jpeg
+!docs/assets/**/*.png
+!docs/assets/**/*.jpg
+!docs/assets/**/*.jpeg
+
+# Video Files (except in docs)
+*.mp4
+*.mov
+*.avi
+!docs/assets/**/*.mp4
+!docs/assets/**/*.mov
+!docs/assets/**/*.avi
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Temporary Files
+*.log
+*.tmp
+tmp/
+temp/
