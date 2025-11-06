@@ -2,6 +2,19 @@
 
 Computer vision system for automatic detection and analysis of Othello board game states. This project processes images and videos of Othello games to extract game positions, track moves, and generate game state strings compatible with GamesmanUni solver format.
 
+## 🌐 Live Demo
+
+**Try it now:** [https://mananb77.github.io/gamescrafters-othello-cv/](https://mananb77.github.io/gamescrafters-othello-cv/)
+
+Interactive demo website featuring:
+- 📸 **Mock Upload Demo** - Test with sample board positions
+- 🎬 **Video Processing Demo** - Watch move detection in action (slowed 10x for clarity)
+- ⚡ **Live Upload Demo** - Process your own images and videos in real-time
+- 📊 **Test Results** - View performance metrics (14/14 tests passing)
+- 📚 **Documentation** - Complete API reference and usage guides
+
+Built with UC Berkeley GamesCrafters branding and deployed on GitHub Pages.
+
 ## Overview
 
 This project uses OpenCV and computer vision techniques to:
