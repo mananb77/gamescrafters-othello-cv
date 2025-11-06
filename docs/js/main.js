@@ -251,8 +251,252 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
+// Live Upload Functionality
+const API_URL = 'http://localhost:5000/api';
+let backendAvailable = false;
+
+// Check backend health on load
+async function checkBackend() {
+    try {
+        const response = await fetch(`${API_URL}/health`);
+        if (response.ok) {
+            backendAvailable = true;
+            const statusEl = document.getElementById('backend-status');
+            if (statusEl) {
+                statusEl.className = 'mt-6 p-4 bg-green-50 border border-green-200 rounded-lg';
+                statusEl.innerHTML = `
+                    <div class="flex items-start space-x-2">
+                        <i class="fas fa-check-circle text-green-600 mt-0.5"></i>
+                        <div class="text-sm">
+                            <p class="font-semibold text-green-900">Backend Connected</p>
+                            <p class="text-green-700 mt-1">Ready to process your uploads!</p>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+    } catch (error) {
+        backendAvailable = false;
+    }
+}
+
+// Handle file upload
+async function handleLiveUpload(file) {
+    if (!backendAvailable) {
+        alert('Backend server is not running. Please start the server first.');
+        return;
+    }
+
+    const boardSize = document.getElementById('live-board-size').value;
+    const annotate = document.getElementById('live-annotate').checked;
+
+    // Show progress
+    document.getElementById('live-progress').classList.remove('hidden');
+    document.getElementById('live-results').innerHTML = `
+        <div class="text-center text-gray-400 py-12">
+            <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-gamescrafters-blue mx-auto mb-4"></div>
+            <p>Processing ${file.name}...</p>
+        </div>
+    `;
+
+    // Create form data
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('board_size', boardSize);
+    formData.append('annotate', annotate);
+
+    try {
+        const response = await fetch(`${API_URL}/process`, {
+            method: 'POST',
+            body: formData
+        });
+
+        document.getElementById('live-progress').classList.add('hidden');
+
+        if (!response.ok) {
+            const error = await response.json();
+            throw new Error(error.error || 'Processing failed');
+        }
+
+        const result = await response.json();
+        displayLiveResults(result);
+
+    } catch (error) {
+        document.getElementById('live-progress').classList.add('hidden');
+        document.getElementById('live-results').innerHTML = `
+            <div class="bg-red-50 border-2 border-red-200 rounded-lg p-6">
+                <div class="flex items-start space-x-3">
+                    <i class="fas fa-exclamation-triangle text-red-500 text-2xl"></i>
+                    <div>
+                        <div class="font-semibold text-red-900 mb-2">Processing Error</div>
+                        <div class="text-sm text-red-700">${error.message}</div>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+}
+
+// Display live upload results
+function displayLiveResults(data) {
+    let html = '';
+
+    if (data.type === 'image') {
+        html = `
+            <div class="space-y-4">
+                <!-- Success Header -->
+                <div class="flex items-center justify-between p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                        <div>
+                            <div class="font-semibold text-gray-900">Processing Complete</div>
+                            <div class="text-sm text-gray-600">${data.processing_time.toFixed(3)}s processing time</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-gray-900">${data.board_size}x${data.board_size}</div>
+                        <div class="text-xs text-gray-600">Board Size</div>
+                    </div>
+                </div>
+
+                <!-- Board State -->
+                <div class="p-4 bg-gray-900 rounded-lg">
+                    <div class="text-xs text-gray-400 uppercase tracking-wide mb-2">Board State String</div>
+                    <div class="font-mono text-sm text-green-400 break-all">${data.state}</div>
+                </div>
+
+                <!-- Piece Count -->
+                <div class="grid grid-cols-3 gap-3">
+                    <div class="p-4 bg-gray-900 text-white rounded-lg text-center">
+                        <div class="text-2xl font-bold">${data.piece_count.black}</div>
+                        <div class="text-xs text-gray-400">Black</div>
+                    </div>
+                    <div class="p-4 bg-gray-100 text-gray-900 rounded-lg text-center">
+                        <div class="text-2xl font-bold">${data.piece_count.white}</div>
+                        <div class="text-xs text-gray-600">White</div>
+                    </div>
+                    <div class="p-4 bg-blue-50 text-blue-900 rounded-lg text-center">
+                        <div class="text-2xl font-bold">${data.piece_count.empty}</div>
+                        <div class="text-xs text-blue-600">Empty</div>
+                    </div>
+                </div>
+
+                <!-- JSON Output -->
+                <div class="p-4 bg-gray-900 rounded-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-xs text-gray-400 uppercase tracking-wide">JSON Output</div>
+                        <button onclick="copyLiveJSON(this)" class="text-xs text-gray-400 hover:text-white transition">
+                            <i class="fas fa-copy mr-1"></i> Copy
+                        </button>
+                    </div>
+                    <pre class="font-mono text-xs text-green-400 overflow-x-auto max-h-48">${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            </div>
+        `;
+    } else if (data.type === 'video') {
+        html = `
+            <div class="space-y-4">
+                <!-- Success Header -->
+                <div class="flex items-center justify-between p-4 bg-green-50 border border-green-200 rounded-lg">
+                    <div class="flex items-center">
+                        <i class="fas fa-check-circle text-green-500 text-2xl mr-3"></i>
+                        <div>
+                            <div class="font-semibold text-gray-900">Video Processed</div>
+                            <div class="text-sm text-gray-600">${data.total_moves} moves detected</div>
+                        </div>
+                    </div>
+                    <div class="text-right">
+                        <div class="text-2xl font-bold text-gray-900">${data.processing_time.toFixed(1)}s</div>
+                        <div class="text-xs text-gray-600">Total Time</div>
+                    </div>
+                </div>
+
+                <!-- Moves List -->
+                <div class="p-4 bg-gray-50 rounded-lg max-h-96 overflow-y-auto">
+                    <div class="text-xs text-gray-600 uppercase tracking-wide mb-3">Detected Moves</div>
+                    <div class="space-y-2 font-mono text-sm">
+                        ${data.moves.slice(0, 10).map((move, i) => `
+                            <div class="flex items-start space-x-3">
+                                <span class="bg-${move.player === 1 ? 'blue' : 'red'}-500 text-white rounded px-2 py-1 text-xs">P${move.player}</span>
+                                <span class="text-gray-700">${move.state}</span>
+                            </div>
+                        `).join('')}
+                        ${data.moves.length > 10 ? `<div class="text-xs text-gray-500 mt-3">...and ${data.moves.length - 10} more moves</div>` : ''}
+                    </div>
+                </div>
+
+                <!-- JSON Output -->
+                <div class="p-4 bg-gray-900 rounded-lg">
+                    <div class="flex items-center justify-between mb-2">
+                        <div class="text-xs text-gray-400 uppercase tracking-wide">JSON Output</div>
+                        <button onclick="copyLiveJSON(this)" class="text-xs text-gray-400 hover:text-white transition">
+                            <i class="fas fa-copy mr-1"></i> Copy
+                        </button>
+                    </div>
+                    <pre class="font-mono text-xs text-green-400 overflow-x-auto max-h-48">${JSON.stringify(data, null, 2)}</pre>
+                </div>
+            </div>
+        `;
+    }
+
+    document.getElementById('live-results').innerHTML = html;
+}
+
+// Copy JSON from live results
+function copyLiveJSON(button) {
+    const jsonText = button.closest('.p-4').querySelector('pre').textContent;
+    navigator.clipboard.writeText(jsonText).then(() => {
+        const originalHTML = button.innerHTML;
+        button.innerHTML = '<i class="fas fa-check mr-1"></i> Copied!';
+        setTimeout(() => {
+            button.innerHTML = originalHTML;
+        }, 2000);
+    });
+}
+
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {
     console.log('Othello CV Demo | GamesCrafters at UC Berkeley');
     console.log('GitHub: https://github.com/mananb77/gamescrafters-othello-cv');
+
+    // Check backend status
+    checkBackend();
+
+    // Setup file upload handlers
+    const uploadArea = document.getElementById('live-upload-area');
+    const fileInput = document.getElementById('live-file-input');
+
+    if (uploadArea && fileInput) {
+        // Click to upload
+        uploadArea.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // File selected
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                handleLiveUpload(file);
+            }
+        });
+
+        // Drag and drop
+        uploadArea.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadArea.classList.add('bg-blue-50');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('bg-blue-50');
+        });
+
+        uploadArea.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadArea.classList.remove('bg-blue-50');
+            const file = e.dataTransfer.files[0];
+            if (file) {
+                handleLiveUpload(file);
+            }
+        });
+    }
 });

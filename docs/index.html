@@ -150,7 +150,7 @@
                         <i class="fas fa-video mr-2"></i> Sample Videos
                     </button>
                     <button onclick="switchTab('future')" id="tab-future" class="tab-button px-6 py-3 font-semibold text-gray-600 border-b-2 border-transparent hover:text-gamescrafters-blue">
-                        <i class="fas fa-rocket mr-2"></i> Live Demo (Coming Soon)
+                        <i class="fas fa-bolt mr-2"></i> Live Demo
                     </button>
                 </div>
 
@@ -274,19 +274,79 @@
                     </div>
                 </div>
 
-                <!-- Future Live Demo Tab -->
+                <!-- Live Upload Demo Tab -->
                 <div id="demo-future" class="tab-content hidden">
-                    <div class="text-center py-16">
-                        <div class="inline-block p-8 bg-gradient-to-br from-gamescrafters-blue to-blue-900 rounded-2xl text-white mb-6">
-                            <i class="fas fa-rocket text-6xl"></i>
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <!-- Upload Section -->
+                        <div>
+                            <div class="bg-gradient-to-br from-gamescrafters-blue to-blue-900 rounded-xl p-6 text-white mb-6">
+                                <div class="flex items-center space-x-3 mb-4">
+                                    <i class="fas fa-bolt text-gamescrafters-gold text-2xl"></i>
+                                    <h3 class="text-xl font-bold">Live Upload</h3>
+                                </div>
+                                <p class="text-blue-100 text-sm">Upload your own Othello board image or video for instant processing</p>
+                            </div>
+
+                            <!-- File Upload Area -->
+                            <div id="live-upload-area" class="border-4 border-dashed border-gamescrafters-blue rounded-xl p-8 text-center cursor-pointer hover:bg-blue-50 transition">
+                                <input type="file" id="live-file-input" accept="image/*,video/*" class="hidden">
+                                <i class="fas fa-cloud-upload-alt text-5xl text-gamescrafters-blue mb-4"></i>
+                                <p class="text-lg font-semibold text-gray-900 mb-2">Drop file here or click to upload</p>
+                                <p class="text-sm text-gray-600 mb-4">Supports: PNG, JPG, MP4, MOV</p>
+                                <button onclick="document.getElementById('live-file-input').click()" class="bg-gamescrafters-blue text-white px-6 py-2 rounded-lg hover:bg-blue-800 transition">
+                                    <i class="fas fa-folder-open mr-2"></i> Choose File
+                                </button>
+                            </div>
+
+                            <!-- Settings -->
+                            <div class="mt-6 bg-gray-50 rounded-lg p-4">
+                                <h4 class="font-semibold text-gray-900 mb-3">Processing Options</h4>
+                                <div class="space-y-3">
+                                    <div class="flex items-center justify-between">
+                                        <label class="text-sm text-gray-700">Board Size:</label>
+                                        <select id="live-board-size" class="border border-gray-300 rounded px-3 py-1 text-sm">
+                                            <option value="4">4x4 (GamesmanUni)</option>
+                                            <option value="8">8x8 (Standard)</option>
+                                        </select>
+                                    </div>
+                                    <div class="flex items-center justify-between">
+                                        <label class="text-sm text-gray-700">Annotate Result:</label>
+                                        <input type="checkbox" id="live-annotate" class="w-4 h-4 text-gamescrafters-blue rounded">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Backend Status -->
+                            <div id="backend-status" class="mt-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                <div class="flex items-start space-x-2">
+                                    <i class="fas fa-info-circle text-yellow-600 mt-0.5"></i>
+                                    <div class="text-sm">
+                                        <p class="font-semibold text-yellow-900">Backend Server Required</p>
+                                        <p class="text-yellow-700 mt-1">Run <code class="bg-yellow-100 px-2 py-0.5 rounded">./backend/start_server.sh</code> to enable live uploads</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Live Interactive Demo Coming Soon!</h3>
-                        <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-6">
-                            We're working on a fully interactive demo where you can upload your own images and videos for real-time processing.
-                        </p>
-                        <div class="inline-flex items-center space-x-2 bg-blue-50 text-blue-700 px-6 py-3 rounded-lg">
-                            <i class="fas fa-info-circle"></i>
-                            <span class="font-semibold">Backend API integration in progress</span>
+
+                        <!-- Results Section -->
+                        <div>
+                            <h3 class="font-semibold text-gray-900 mb-4">Processing Results</h3>
+                            <div id="live-results" class="bg-gray-50 rounded-xl p-6 min-h-96">
+                                <div class="text-center text-gray-400 py-12">
+                                    <i class="fas fa-info-circle text-4xl mb-3"></i>
+                                    <p>Upload a file to see real-time processing results</p>
+                                </div>
+                            </div>
+
+                            <!-- Progress Indicator -->
+                            <div id="live-progress" class="hidden mt-6">
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                    <div class="flex items-center space-x-3">
+                                        <div class="animate-spin rounded-full h-5 w-5 border-b-2 border-gamescrafters-blue"></div>
+                                        <span class="text-sm font-semibold text-gamescrafters-blue">Processing your upload...</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
