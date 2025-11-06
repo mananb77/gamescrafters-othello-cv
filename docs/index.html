@@ -167,25 +167,37 @@
 
                             <!-- Sample Selection -->
                             <div class="mt-6">
-                                <h3 class="font-semibold text-gray-900 mb-4">Sample Images:</h3>
-                                <div class="grid grid-cols-3 gap-3">
-                                    <button onclick="loadSample('4x4-game1')" class="sample-btn p-3 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition">
-                                        <div class="aspect-square bg-gray-200 rounded mb-2 flex items-center justify-center">
-                                            <i class="fas fa-chess-board text-2xl text-gray-600"></i>
+                                <h3 class="font-semibold text-gray-900 mb-4">Sample Board Positions:</h3>
+                                <div class="space-y-3">
+                                    <button onclick="loadSample('4x4-early')" class="sample-btn w-full p-4 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition text-left flex items-center space-x-4">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-green-600 to-green-700 rounded-lg flex items-center justify-center">
+                                            <div class="text-white font-bold text-xs">4x4</div>
                                         </div>
-                                        <div class="text-xs font-semibold">4x4 Game</div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-gray-900">4x4 Early Game</div>
+                                            <div class="text-xs text-gray-500">GamesmanUni • 3B 3W • 6 moves</div>
+                                        </div>
+                                        <i class="fas fa-arrow-right text-gray-400"></i>
                                     </button>
-                                    <button onclick="loadSample('8x8-game1')" class="sample-btn p-3 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition">
-                                        <div class="aspect-square bg-gray-200 rounded mb-2 flex items-center justify-center">
-                                            <i class="fas fa-chess-board text-3xl text-gray-600"></i>
+                                    <button onclick="loadSample('8x8-opening')" class="sample-btn w-full p-4 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition text-left flex items-center space-x-4">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-blue-600 to-blue-700 rounded-lg flex items-center justify-center">
+                                            <div class="text-white font-bold text-xs">8x8</div>
                                         </div>
-                                        <div class="text-xs font-semibold">8x8 Game</div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-gray-900">8x8 Opening</div>
+                                            <div class="text-xs text-gray-500">Standard • 2B 2W • Classic start</div>
+                                        </div>
+                                        <i class="fas fa-arrow-right text-gray-400"></i>
                                     </button>
-                                    <button onclick="loadSample('annotated')" class="sample-btn p-3 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition">
-                                        <div class="aspect-square bg-gray-200 rounded mb-2 flex items-center justify-center">
-                                            <i class="fas fa-border-all text-2xl text-gray-600"></i>
+                                    <button onclick="loadSample('4x4-complex')" class="sample-btn w-full p-4 border-2 border-gray-300 rounded-lg hover:border-gamescrafters-blue transition text-left flex items-center space-x-4">
+                                        <div class="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-purple-600 to-purple-700 rounded-lg flex items-center justify-center">
+                                            <div class="text-white font-bold text-xs">4x4</div>
                                         </div>
-                                        <div class="text-xs font-semibold">With Grid</div>
+                                        <div class="flex-1">
+                                            <div class="font-semibold text-sm text-gray-900">4x4 Late Game</div>
+                                            <div class="text-xs text-gray-500">GamesmanUni • 5B 9W • Near end</div>
+                                        </div>
+                                        <i class="fas fa-arrow-right text-gray-400"></i>
                                     </button>
                                 </div>
                             </div>
@@ -223,8 +235,8 @@
                                         Your browser does not support the video tag.
                                     </video>
                                     <div class="p-4 bg-gray-800 text-white">
-                                        <div class="font-semibold">4x4 GamesmanUni Game - Annotated</div>
-                                        <div class="text-sm text-gray-400">13 moves detected in 12.5s • 2,646 frames processed</div>
+                                        <div class="font-semibold">4x4 GamesmanUni Game - Slowed for Viewing</div>
+                                        <div class="text-sm text-gray-400">13 moves • ~12s video • Watch state changes in detail</div>
                                     </div>
                                 </div>
 

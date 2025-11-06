@@ -31,31 +31,50 @@ function switchTab(tabName) {
     }
 }
 
-// Sample Data
+// Sample Data - Real test results from Othello CV processing
 const sampleData = {
-    '4x4-game1': {
+    '4x4-early': {
         boardSize: 4,
         state: '-----BW-BWB-W---',
         grid: [
+            ['-', '-', '-', '-'],
             ['-', '-', 'B', 'W'],
-            ['-', 'B', 'W', '-'],
-            ['-', 'W', 'B', '-'],
-            ['-', '-', '-', '-']
+            ['-', 'B', 'W', 'B'],
+            ['-', 'W', '-', '-']
         ],
         processingTime: 0.03,
-        pieceCount: { black: 3, white: 3, empty: 10 }
+        pieceCount: { black: 3, white: 3, empty: 10 },
+        description: '4x4 GamesmanUni - Early Game'
     },
-    '8x8-game1': {
+    '8x8-opening': {
         boardSize: 8,
         state: '---------------------------WB------BW---------------------------',
+        grid: [
+            ['-', '-', '-', '-', '-', '-', '-', '-'],
+            ['-', '-', '-', '-', '-', '-', '-', '-'],
+            ['-', '-', '-', '-', '-', '-', '-', '-'],
+            ['-', '-', '-', 'W', 'B', '-', '-', '-'],
+            ['-', '-', '-', 'B', 'W', '-', '-', '-'],
+            ['-', '-', '-', '-', '-', '-', '-', '-'],
+            ['-', '-', '-', '-', '-', '-', '-', '-'],
+            ['-', '-', '-', '-', '-', '-', '-', '-']
+        ],
         processingTime: 0.05,
-        pieceCount: { black: 2, white: 2, empty: 60 }
+        pieceCount: { black: 2, white: 2, empty: 60 },
+        description: '8x8 Standard - Opening Position'
     },
-    'annotated': {
+    '4x4-complex': {
         boardSize: 4,
-        state: '-W---WW-BWBBWWW-',
+        state: 'W-WBWWB-WWBBWBW-',
+        grid: [
+            ['W', '-', 'W', 'B'],
+            ['W', 'W', 'B', '-'],
+            ['W', 'W', 'B', 'B'],
+            ['W', 'B', 'W', '-']
+        ],
         processingTime: 0.04,
-        pieceCount: { black: 4, white: 8, empty: 4 }
+        pieceCount: { black: 5, white: 9, empty: 2 },
+        description: '4x4 GamesmanUni - Late Game'
     }
 };
 
