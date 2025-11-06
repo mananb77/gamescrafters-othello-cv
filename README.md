@@ -13,10 +13,12 @@ Interactive demo website featuring:
 - 📊 **Test Results** - View performance metrics (14/14 tests passing)
 - 📚 **Documentation** - Complete API reference and usage guides
 
-**Sample Files for Testing:** Use files from the [`uploads/`](uploads/) folder in this repository to test the live demo:
-- `input-othello-4x4-gamesmanuni.mov` - 4x4 GamesmanUni video
-- `input-othello-8x8.mov` - 8x8 standard Othello video
-- `random-board-gamesman-uni.png` - Sample board image
+**Sample Files for Testing:** Download files from the [`uploads/`](uploads/) folder to test the **Live Upload Demo**:
+- [`input-othello-4x4-gamesmanuni.mov`](uploads/input-othello-4x4-gamesmanuni.mov) - 4x4 GamesmanUni video
+- [`input-othello-8x8.mov`](uploads/input-othello-8x8.mov) - 8x8 standard Othello video
+- [`random-board-gamesman-uni.png`](uploads/random-board-gamesman-uni.png) - Sample board image
+
+**Note:** The Live Upload Demo requires the backend server to be running (see [Backend Setup](#backend-setup) below).
 
 Built with UC Berkeley GamesCrafters branding and deployed on GitHub Pages.
 
@@ -116,6 +118,54 @@ Produces:
 
 See **[DEMO_INSTRUCTIONS.md](DEMO_INSTRUCTIONS.md)** for complete usage guide, examples, and web integration instructions.
 
+## Backend Setup
+
+To enable the **Live Upload Demo** on the website, you need to run the Flask backend server:
+
+### Local Development
+
+```bash
+cd backend
+./start_server.sh
+```
+
+The backend will start at `http://localhost:5001` and automatically handle file uploads from the website.
+
+**Features:**
+- Real-time image and video processing
+- RESTful API endpoints
+- CORS enabled for web integration
+- Automatic file cleanup after processing
+
+See **[backend/README.md](backend/README.md)** for complete API documentation.
+
+### Cloud Deployment (Optional)
+
+For production use, deploy the backend to a cloud service:
+
+**Option 1: Railway**
+```bash
+# Install Railway CLI: https://docs.railway.app/develop/cli
+railway login
+railway init
+railway up
+```
+
+**Option 2: Heroku**
+```bash
+# Install Heroku CLI: https://devcenter.heroku.com/articles/heroku-cli
+heroku login
+heroku create othello-cv-api
+git push heroku main
+```
+
+**Option 3: DigitalOcean App Platform**
+- Connect your GitHub repository
+- Set build command: `pip install -r backend/requirements.txt`
+- Set run command: `python backend/app.py`
+
+**Note:** GitHub Pages only serves static content, so the backend must be deployed separately for the Live Upload Demo to work online. The Mock Upload and Video demos work without a backend.
+
 ## Project Structure
 
 ```
@@ -127,6 +177,18 @@ gamescrafters-othello-cv/
 ├── README.md                               # Project overview
 ├── DEMO_INSTRUCTIONS.md                    # ⭐ Complete usage guide
 ├── TEST_REPORT.md                          # ⭐ Test results & validation
+│
+├── backend/                                # ⭐ Flask API server
+│   ├── app.py                              # Backend server
+│   ├── requirements.txt                    # Backend dependencies
+│   ├── start_server.sh                     # Quick start script
+│   └── README.md                           # API documentation
+│
+├── docs/                                   # ⭐ Demo website
+│   ├── index.html                          # Main website
+│   ├── css/custom.css                      # Styles
+│   ├── js/main.js                          # Interactive features
+│   └── assets/                             # Images and videos
 │
 ├── othello-cv-md.ipynb                     # Notebook: Basic CV pipeline
 ├── othello-gamesman-uni.ipynb              # Notebook: GamesmanUni integration
@@ -143,7 +205,7 @@ gamescrafters-othello-cv/
 └── test_results/                           # Generated test outputs
 ```
 
-⭐ = New demo files (production-ready)
+⭐ = Production-ready demo files
 
 ## Usage
 
