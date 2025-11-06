@@ -406,8 +406,8 @@ function displayLiveResults(data) {
                         </div>
                     </div>
                     <div class="text-right">
-                        <div class="text-2xl font-bold text-gray-900">${data.processing_time.toFixed(1)}s</div>
-                        <div class="text-xs text-gray-600">Total Time</div>
+                        <div class="text-2xl font-bold text-gray-900">${data.total_frames || 0}</div>
+                        <div class="text-xs text-gray-600">Total Frames</div>
                     </div>
                 </div>
 

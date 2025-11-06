@@ -115,13 +115,17 @@ def process_upload():
             if result is None:
                 return jsonify({'error': 'Video processing failed'}), 500
 
+            # Extract moves from result dict
+            moves = result.get('moves', [])
+
             # Format response
             response = {
                 'type': 'video',
                 'board_size': board_size,
-                'moves': result,
-                'total_moves': len(result),
-                'processing_time': sum(move.get('processing_time', 0) for move in result)
+                'moves': moves,
+                'total_moves': result.get('total_moves', len(moves)),
+                'total_frames': result.get('total_frames', 0),
+                'processing_time': 0  # Video processing doesn't track time per move
             }
 
         else:
